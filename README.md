@@ -1,3 +1,5 @@
+### 本文详细讲解了如何在 AspNetCore 中编写自定义中间件，并实现支持热重载和按 IP 分区的速率限制中间件。
+包括基础版和升级版实现、配置文件、PowerShell 测试示例及实验截图。
 ### 先讲一下怎么编写自定义中间件。
 事实上，中间件类就是一个普通的.NET 类，它不需要继承任何父类或者实现任何接口，但是这个类需要有一个构造方法，
 且该方法至少要有一个 “ RequestDelegate ” 类型的参数，这个参数用来指向下一个中间件。这个类还需要定义一个名字为 “ Invoke ” 或 “ InvokeAsync ” 的方法，
@@ -33,7 +35,8 @@ namespace TestMiddlewareEasy01x02.Middlewares
 
 ![屏幕截图 2026-02-25 102028](https://www.filepunk.top/files/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-02-25%20102028.png)
 
->注：            await _next(context);后无代码即，该中间件无后逻辑
+>注：            await _next(context);后无代码,即表明该中间件无后逻辑
+>
 在program中使用：
 ```csharp
 app.UseMiddleware<RequestDurationMiddleware>();
